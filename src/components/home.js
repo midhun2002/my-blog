@@ -9,7 +9,7 @@ function Home() {
     const [tags,setTags] = useState({})
     const [topic,setTopic]= useState([])
     useEffect(()=> {
-        axios.get('http://localhost:8001/posts')
+        axios.get('https://beginner-blog.herokuapp.com/posts')
         .then(res=>{handleTags(res.data);setTopic(res.data);setPosts(res.data);})
         .catch(err=>console.log(err))
     }, [])

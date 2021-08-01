@@ -6,7 +6,7 @@ function PostBlog() {
     const [Tag,setTag] = useState("")
     const [Content,setContent] = useState("")
     const handleSubmit = ()=>{
-        axios.post('http://localhost:8001/posts',{Title,Tag,Content})
+        axios.post('https://beginner-blog.herokuapp.com/posts',{Title,Tag,Content})
         .then(res=> window.location.href = "/")
         .catch(err=>alert("Error has occurred",err))
     }
