@@ -7,7 +7,7 @@ function PostBlog() {
     const [Content,setContent] = useState("")
     const handleSubmit = ()=>{
         axios.post('https://beginner-blog.herokuapp.com/posts',{Title,Tag,Content})
-        .then(res=> window.location.href = "/")
+        .then(res=> window.location.href = "https://pedantic-tesla-c0e4f9.netlify.app/")
         .catch(err=>alert("Error has occurred",err))
     }
     return (
