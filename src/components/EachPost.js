@@ -4,7 +4,7 @@ import './EachPost.css'
 function EachPost({match}) {
     const [post,setPost] = useState({})
     useEffect(()=>{
-        axios.get(`http://localhost:8001/posts/${match.params.id}`)
+        axios.get(`https://beginner-blog.herokuapp.com/posts/${match.params.id}`)
         .then(res=>setPost(res.data))
         .catch(err=>alert("Error occured"))
     }, [])
