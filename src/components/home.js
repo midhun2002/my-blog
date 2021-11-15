@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import BlogHeader from './Blogheader'
+import GoogleAds from './GoogleAds'
 import './Home.css'
 import {Link} from 'react-router-dom'
 function Home() {
@@ -29,13 +30,14 @@ function Home() {
           return; 
     }
     return (
+
         <div className="Home">
           <div className="home-header">
               <h1>Technical Blog</h1>
               <input id="search-bar" value={nav} onChange={(e)=>handleNav(e)} autoComplete="on" placeholder="Search any topic"></input>         
           </div>
           <div className="home-container">
-            <div className="Ads">ADS</div>
+            <div className="Ads"><GoogleAds slot="7804230643"/></div>
             <div className="blog-content">{topic.map((post)=> <BlogHeader post={post} key={post._id}></BlogHeader>)}</div>
             <div className="Tags">
                <h3 className="tag-headline">Check for Tags</h3>
