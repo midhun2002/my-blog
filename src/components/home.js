@@ -10,12 +10,14 @@ function Home() {
     const [topic,setTopic]= useState([])
     useEffect(()=> {
         axios.get('https://beginner-blog.herokuapp.com/posts')
-        .then(res=>{handleTags(res.data);setTopic(res.data);setPosts(res.data);})
+        .then(res=>{handleTags(res.data)})
         .catch(err=>console.log(err))
     }, [])
     const handleTags = (Data)=>{
       Data.map(data =>{ let topics = tags; !(data.Tag in tags) ? topics[[data.Tag]] = 1 : topics[data.T]+=1; setTags(topics)
       })
+      setTopic(Data);
+      setPosts(Data);
       return ;
     }
     const handleSearch = (Tag)=>{
@@ -23,29 +25,36 @@ function Home() {
         setTopic(temptopics);
     }
     const handleNav = (e) =>{
-          setNav(e.target.value);
-          // let temptopics = posts.filter(post =>(true && text.test(post.Title)))
-          // setTopic(temptopics);      
+          setNav(e.target.value);     
           return; 
     }
     return (
         <div className="Home">
-          <h1>Technical Blog</h1>
-          <button id="postbtn"><Link to="/postblog">Create new post</Link></button>
-          <input id="search-bar" value={nav} onChange={(e)=>handleNav(e)} autoComplete="on" placeholder="Enter any topic you interested"></input> 
-          <div className="Tags">
-            {
-              Object.keys(tags).map((key,value) => <button key={key} onClick={()=>handleSearch(key)} className="Taginfo">{key}({tags[key]})</button>)
-            }
+          <div className="home-header">
+              <h1>Technical Blog</h1>
+              <input id="search-bar" value={nav} onChange={(e)=>handleNav(e)} autoComplete="on" placeholder="Search any topic"></input>         
           </div>
-          <div className="blog-content">
-            {
-              topic.map((post)=>{   
-                 return <BlogHeader key={post._id} post={post}></BlogHeader>
-              })
-            }          
-          </div>
-        </div>
+          <div className="home-container">
+            <div className="Ads">ADS</div>
+            <div className="blog-content">{topic.map((post)=> <BlogHeader post={post} key={post._id}></BlogHeader>)}</div>
+            <div className="Tags">
+               <h3 className="tag-headline">Check for Tags</h3>
+               <div className="all-tags">
+                  {
+                    Object.keys(tags).map((key,value) => 
+                      <div className="flex-tag">
+                        <div className="tag-container">
+                          <button key={key} onClick={()=>handleSearch(key)} className="Taginfo">{key}</button>
+                          <div className="count-bar">{tags[key]}</div>
+                        </div>
+                      </div>
+                    )
+                  }
+              </div>
+            </div>
+          </div> 
+          <button id="postbtn"><Link to="/postblog">Create new post</Link></button>  
+        </div>     
     );
 }
 
